@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mail Minder</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="description">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__container _container">
+            <div class="header__logo logo">
+                <div class="logo__icon">
+                    <picture>
+                        <source srcset="img/logo.svg" type="image/webp">
+                        <img src="img/logo.svg" alt="Mail Minder Logo"></picture>
+                </div>
+                <h1 class="logo__label">Mail Minder</h1>
+            </div>
+            <div id="header-info" class="header__info info">
+                <span class="info__label">What is it?</span>
+                <div class="info__icon">
+                    <picture>
+                        <source srcset="img/info.svg" type="image/webp">
+                        <img src="img/info.svg" alt="Info"></picture>
+                </div>
+                <div id="header-popup" class="header__popup">
+                    <div id="popupCloseDesktop" class="header__popup-close">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="info__label">What is it?</span>
+                    <p>Email reminders made simple. Send yourself a email reminder for Mom’s birthday, dentist
+                        appointment, or anything you want.</p>
+                    <a href="https://petrovdigital.io/" target="_blank">Created by:<br>
+                        <span>
+                           <picture>
+                              <source srcset="img/petrov.svg" type="image/webp">
+                              <img src="img/petrov.svg" alt="Created by logo">
+                           </picture>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="header__info info-mobile">
+                <label for="infoCheck" class="info__label">What is it?</label>
+                <input id="infoCheck" type="checkbox">
+                <div class="header__popup popup-mobile">
+                    <div id="popupCloseMobile" class="header__popup-close">
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="info__label">What is it?</span>
+                    <p>Email reminders made simple. Send yourself a email reminder for Mom’s birthday, dentist
+                        appointment, or anything you want.</p>
+                    <a href="https://petrovdigital.io/" target="_blank">Created by:<br>
+                        <span>
+                           <picture>
+                              <source srcset="img/petrov.svg" type="image/webp">
+                              <img src="img/petrov.svg" alt="Created by logo">
+                           </picture>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="page">
+        <section class="page__form-section form-section">
+            <div class="form-section__container _container">
+                <form action="" class="form-section__form form">
+                    <div class="form__datepicker datepicker">
+                        <div class="datepicker__block">
+                            <div class="quantity">
+                                <div class="quantity__input quantity__input_year">
+                                    <label for="Year">20</label>
+                                    <button class="quantity__button quantity__button_minus" type="button">
+                                    </button>
+                                    <input class="quantity-year"
+                                           id="Year"
+                                           name="Year"
+                                           autocomplete="off"
+                                           type="number"
+                                           data-value="19"
+                                           maxlength="2"
+                                           min="1"
+                                           placeholder="19"
+                                           max="99"
+                                           tabindex="1"
+                                           required onchange="yearNumber()">
+                                    <button class="quantity__button quantity__button_plus" type="button">
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="datepicker__label">Year</span>
+                        </div>
+                        <div class="datepicker__block">
+                            <div class="quantity">
+                                <div class="quantity__input quantity__input_month">
+                                    <button class="quantity__button quantity__button_minus" type="button">
+                                    </button>
+                                    <input class="quantity-month"
+                                           name="Month"
+                                           autocomplete="off"
+                                           type="number"
+                                           min="1"
+                                           maxlength="2"
+                                           placeholder="09"
+                                           max="12"
+                                           tabindex="2"
+                                           required
+                                           onchange="monthNumber()">
+                                    <button class="quantity__button quantity__button_plus" type="button">
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="datepicker__label">September</span>
+                        </div>
+                        <div class="datepicker__block">
+                            <div class="quantity">
+                                <div class="quantity__input quantity__input_day">
+                                    <button class="quantity__button quantity__button_minus" type="button">
+                                    </button>
+                                    <input class="quantity-day"
+                                           name="Day"
+                                           type="number"
+                                           min="1"
+                                           placeholder="01"
+                                           max="31"
+                                           maxlength="2"
+                                           tabindex="3"
+                                           required
+                                           onchange="dayNumber();">
+                                    <button class="quantity__button quantity__button_plus" type="button">
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="datepicker__label">Monday</span>
+                        </div>
+                    </div>
+                    <div class="form__textarea textarea">
+                        <textarea name="Message" id="Message" class="input message" placeholder="Type here"
+                                  tabindex="4" required></textarea>
+                    </div>
+                    <div class="form__email email">
+                        <input autocomplete="on" type="email" name="email" class="input" placeholder="email@gmail.com"
+                               tabindex="5" required>
+                    </div>
+                    <button id="schedule-btn" type="submit" class="form__button button" tabindex="6">Schedule</button>
+                    <button id="save-btn" type="submit" class="form__button button" tabindex="6">Save</button>
+                    <div class="form__frame">
+                        <div class="form__frame-top">
+                            <div class="form__frame-label">edit mode</div>
+                            <div class="form__frame-close">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="form__frame-bottom"></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="page__scheduled scheduled">
+            <div class="scheduled__login">
+                <a href="#!" class="scheduled__login-btn" tabindex="7">Login</a>
+                <span class="scheduled__description">to view all scheduled mail minders</span>
+            </div>
+            <div class="page__scheduled-header">
+                <div>
+                    <picture>
+                        <source srcset="img/mails-left.svg" type="image/webp">
+                        <img src="img/mails-left.svg" alt="Mail Minder">
+                    </picture>
+                </div>
+                <h1>Scheduled Mail Minders</h1>
+                <div>
+                    <picture>
+                        <source srcset="img/mails-right.svg" type="image/webp">
+                        <img src="img/mails-right.svg" alt="Mail Minder">
+                    </picture>
+                </div>
+            </div>
+            <div class="page__scheduled-items">
+                <div class="item-block">
+                    <div class="scheduled-item">
+                        <div class="scheduled-item__top">
+                            <div class="scheduled-item__left">
+                                <div class="scheduled-item__date">
+                                    <span>2019</span> / <span>05</span> / <span>12</span>
+                                </div>
+                                <div class="scheduled-item__text">
+                                    Grandpa’s birthday
+                                </div>
+                            </div>
+                            <div class="scheduled-item__right">
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dropdown">
+                                    <ul class="scheduled-item__dropdown-list">
+                                        <li>send it now</li>
+                                        <li>archive</li>
+                                        <li>delete</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scheduled-item__bottom">
+                            <ul class="reminders-list">
+                                <li class="reminder-item default" id="reminder-default">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="01" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="01" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span class="days-count">0</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder <span id="reminder-number">1</span>
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="11" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>0</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 1
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="09" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>1</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 2
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="05" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>3</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 3
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item add" data-add="reminder-add">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                ____
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                __
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                __
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Add Reminder
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn add" title="Add reminder"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="item-block__close">
+                                <div>Close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-block">
+                    <div class="scheduled-item">
+                        <div class="scheduled-item__top">
+                            <div class="scheduled-item__left">
+                                <div class="scheduled-item__date">
+                                    <span>2019</span> / <span>03</span> / <span>16</span>
+                                </div>
+                                <div class="scheduled-item__text">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aut debitis est,
+                                    fugit
+                                    temporibus voluptas? Assumenda at distinctio ducimus eius facilis hic incidunt,
+                                    magnam
+                                    magni
+                                    mollitia sint ullam ut voluptatum?
+                                </div>
+                            </div>
+                            <div class="scheduled-item__right">
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dot"></div>
+                                <div class="scheduled-item__dropdown">
+                                    <ul class="scheduled-item__dropdown-list">
+                                        <li>send it now</li>
+                                        <li>archive</li>
+                                        <li>delete</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scheduled-item__bottom">
+                            <ul class="reminders-list">
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="11" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>0</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 1
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="09" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>1</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 2
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                <input class="reminder-item__year" type="number" value="2019" min="2019" max="3000" maxlength="4">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__month" type="number" value="05" min="1" max="12" maxlength="2">
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                <input class="reminder-item__day" type="number" value="05" min="1" max="31" maxlength="2">
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__days">
+                                            <button class="quantity__button quantity__button_minus"
+                                                    type="button"></button>
+                                            <div>
+                                                <span>3</span> days
+                                            </div>
+                                            <button class="quantity__button quantity__button_plus"
+                                                    type="button"></button>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Reminder 3
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn remove" data-remove="reminder-remove" title="Delete reminder"></div>
+                                    </div>
+                                </li>
+                                <li class="reminder-item add" data-add="reminder-add">
+                                    <div class="reminder-item__left">
+                                        <div class="reminder-item__date">
+                                            <div>
+                                                ____
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                __
+                                            </div>
+                                            <div style="padding-top: 1px;">/</div>
+                                            <div>
+                                                __
+                                            </div>
+                                        </div>
+                                        <div class="reminder-item__text">
+                                            Add Reminder
+                                        </div>
+                                    </div>
+                                    <div class="reminder-item__right">
+                                        <div class="reminder-item__btn add" title="Add reminder"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="item-block__close">
+                                <div>Close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<div class="page-popup schedule-popup">
+    <div class="schedule-popup__content">
+        <div class="schedule-popup__img">
+            <div class="schedule-popup__tick">
+                <picture>
+                    <source srcset="img/tick.svg" type="image/webp">
+                    <img src="img/tick.svg" alt="Mail Minder">
+                </picture>
+            </div>
+            <picture>
+                <source srcset="img/scheduled.svg" type="image/webp">
+                <img src="img/scheduled.svg" alt="Mail Minder Logo">
+            </picture>
+        </div>
+        <div class="schedule-popup__text">MAIL SCHEDULED!</div>
+    </div>
+</div>
+<div class="page-popup login-popup">
+    <div class="login-popup__content">
+        <form action="" class="login-form">
+            <div class="login-form__email email">
+                <input autocomplete="on" type="email" name="email" class="input" placeholder="email@gmail.com"
+                       required>
+            </div>
+            <button id="login-btn" type="submit" class="form__button button">Login</button>
+        </form>
+    </div>
+</div>
+<script src="js/main.js"></script>
+</body>
+</html>
