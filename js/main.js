@@ -118,36 +118,54 @@ schedulePopup.addEventListener("click", function (e) {
 
 // SendGrid API key
 // TODO: Add your own API key here
-const API_KEY = "YOUR_OWN_API_KEY";
+const API_KEY = "INPUT_API_KEY";
+// Suppression group id
+// TODO: Add your own suppression group id (aka unsubscribe group id) here
+const suppress_group_id = 00000;
 // SendGrid base url
 const SENDGRID_BASE_URL = "https://api.sendgrid.com/v3/";
 
 async function scheduleEmail() {
-  const year = document.querySelector(".quantity-year").value;
-  const month = document.querySelector(".quantity-month").value;
-  const day = document.querySelector(".quantity-day").value;
-  const message = document.getElementById("Message").value;
-  const email = document.getElementById("to_email").value;
-  const data = {
-    year,
-    month,
-    day,
-    message,
-    email,
-  };
-  // Create a list
-  let list_id = await createContactList(data);
-  if (!list_id) {
-    // Search contact by emails
-    let list_ids = await searchContactByEmail(data);
-    if (list_ids) {
-      // If exists, get list id
-      list_id = list_ids[0];
+  try {
+    const year = document.querySelector(".quantity-year").value;
+    const month = document.querySelector(".quantity-month").value;
+    const day = document.querySelector(".quantity-day").value;
+    const message = document.getElementById("Message").value;
+    const email = document.getElementById("to_email").value;
+    const data = {
+      year,
+      month,
+      day,
+      message,
+      email,
+    };
+    // Create a list
+    let list_id = await createContactList(data);
+    if (!list_id) {
+      // Search contact by emails
+      let list_ids = await searchContactByEmail(data);
+      if (list_ids) {
+        // If exists, get list id
+        list_id = list_ids[0];
+      }
     }
+    // Get list of senders
+    const senders = await getVerifiedSenders();
+    // Create single send to list id
+    const createSingleSendEmailResponse = await createSingleSendEmail(
+      data,
+      list_id,
+      senders
+    );
+    // Schedule single send to list id
+    const scheduleSingleSendEmailResponse = await scheduleSingleSendEmail(
+      data,
+      createSingleSendEmailResponse
+    );
+    console.log(scheduleSingleSendEmailResponse);
+  } catch (e) {
+    return null;
   }
-  // Single send to list id
-  const scheduleEmailResponse = await singleSendEmail(data, list_id);
-  console.log(scheduleEmailResponse);
 }
 async function createContactList(data) {
   try {
@@ -196,18 +214,43 @@ async function searchContactByEmail(data) {
     return null;
   }
 }
-async function singleSendEmail(data, list_id) {
+async function getVerifiedSenders() {
+  try {
+    const url = SENDGRID_BASE_URL + "verified_senders";
+    const header = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + API_KEY,
+    };
+    const res = await fetch(url, {
+      headers: header,
+      method: "GET",
+    }).then((data) => data.json());
+    if (res === null) return null;
+    const senders = res.results;
+    return senders;
+  } catch (e) {
+    console.log(e.message);
+    throw e;
+  }
+}
+async function createSingleSendEmail(data, list_id, senders) {
   try {
     const url = SENDGRID_BASE_URL + "marketing/singlesends";
-    const scheduledDate = new Date(
-      `20${data.year}-${data.month}-${data.day}`
-    ).toISOString();
+    const subject = "Mail Minder to " + data.email;
+    if (senders.length === 0) {
+      throw new Error("There are no verified senders");
+    }
+    const sender_id = senders[0].id;
+    data.message += "<br />";
     const body = JSON.stringify({
-      name: "Mail Minder to " + data.email,
-      send_at: scheduledDate,
+      name: subject,
       send_to: { list_ids: [list_id] },
       email_config: {
+        subject: subject,
         plain_content: data.message,
+        html_content: data.message,
+        sender_id: sender_id,
+        suppression_group_id: suppress_group_id,
       },
     });
     const header = {
@@ -223,7 +266,42 @@ async function singleSendEmail(data, list_id) {
     return res;
   } catch (e) {
     console.log(e.message);
-    return null;
+    throw e;
+  }
+}
+async function scheduleSingleSendEmail(data, singleSendResponse) {
+  try {
+    const id = singleSendResponse.id;
+    const url = SENDGRID_BASE_URL + `marketing/singlesends/${id}/schedule`;
+    let scheduledDate = new Date(
+      `20${data.year}-${data.month}-${data.day}`
+    ).toISOString();
+    // If the schedule is today, send the email immediately
+    const now = new Date();
+    const isToday =
+      parseInt(data.day) === now.getDate() &&
+      parseInt(data.month) === now.getMonth() + 1 &&
+      parseInt(`20${data.year}`) === now.getFullYear();
+    if (isToday) {
+      scheduledDate = "now";
+    }
+    const body = JSON.stringify({
+      send_at: scheduledDate,
+    });
+    const header = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + API_KEY,
+    };
+    const res = await fetch(url, {
+      headers: header,
+      body: body,
+      method: "PUT",
+    }).then((data) => data.json());
+    if (res === null) return null;
+    return res;
+  } catch (e) {
+    console.log(e.message);
+    throw e;
   }
 }
 
@@ -253,7 +331,7 @@ loginPopup.addEventListener("click", function (e) {
 
 loginForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  // TODO: login and fetch all emails
+  // Login and fetch all emails
   loginPopup.classList.remove("active");
   body.classList.remove("lock");
   scheduledLoginBlock.style.display = "none";
