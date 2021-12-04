@@ -118,10 +118,11 @@ schedulePopup.addEventListener("click", function (e) {
 
 // SendGrid API key
 // TODO: Add your own API key here
-const API_KEY = "INPUT_API_KEY";
+const API_KEY =
+  "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";
 // Suppression group id
 // TODO: Add your own suppression group id (aka unsubscribe group id) here
-const suppress_group_id = 00000;
+const suppress_group_id = 18113;
 // SendGrid base url
 const SENDGRID_BASE_URL = "https://api.sendgrid.com/v3/";
 
